@@ -1,0 +1,18 @@
+apiVersion: funk.knative.dev/v1alpha1
+kind: SDKInit
+metadata:
+  name: funk-go-sdk
+spec:
+  steps:
+    - name: "Create cmd directory"
+      mkdir: "cmd"
+    - name: "Create pkg directory"
+      mkdir: "pkg"
+    - name: "Create config directory"
+      mkdir: "config"
+    - name: "Initialize go mod"
+      exec: "go mod init"
+    - name: "Create README.md"
+      template:
+        source: "templates/init/README.md"
+        dest: "README.md"

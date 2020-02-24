@@ -1,0 +1,23 @@
+package funks
+
+import (
+  "context"
+  "log"
+
+  "github.com/mikehelmick/play/pkg/{{.InType.Path}}"
+  cloudevents "github.com/cloudevents/sdk-go"
+)
+
+func Funk{{.FunkName}}(ctx context.Context, event cloudevents.Event) error {
+  var data = &{{.InType.LastPart}}.{{.InType.UpCaseTypeName}}{}
+  err := event.DataAs(data)
+  if err != nil {
+    log.Fatalf("unable to unmarshal event payload: %v", err)
+    return err
+  }
+
+  log.Printf("Received event of type %s with content %v", event.Type(), data)
+  // TODO(you) Do something to handle the event.
+
+  return nil
+}
